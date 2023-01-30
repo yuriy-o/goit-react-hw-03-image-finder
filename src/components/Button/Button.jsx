@@ -1,3 +1,16 @@
-// При натисканні на кнопку Load more повинна довантажуватись наступна порція зображень і рендеритися разом із попередніми.
-// Кнопка повинна рендеритися лише тоді, коли є якісь завантажені зображення.
-// Якщо масив зображень порожній, кнопка не рендериться.
+import { PropTypes } from 'prop-types';
+import { OnLoadMoreButton, ButtonWrapp } from 'components/Button/Button.styled';
+
+export const Button = ({ onLoadMore }) => {
+    return (
+        <ButtonWrapp>
+            <OnLoadMoreButton type='button' onClick={() => onLoadMore()}>
+                Load more
+            </OnLoadMoreButton>
+        </ButtonWrapp>
+    );
+};
+
+Button.propTypes = {
+  onLoadMore: PropTypes.func.isRequired,
+};

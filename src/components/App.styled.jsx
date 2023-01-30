@@ -6,3 +6,9 @@ export const Container = styled.main`
   grid-gap: 16px;
   padding-bottom: 24px;
 `;
+export const ErrorMessage = styled.p`
+  color: #b97575 ;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+`;

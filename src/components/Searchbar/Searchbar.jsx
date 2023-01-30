@@ -1,35 +1,46 @@
-/* 
-Компонент приймає один проп onSubmit – функцію для передачі значення інпута під час сабміту форми.
-Створює DOM - елемент наступної структури.
-*/
-
+// import { PropTypes } from 'prop-types';
 import { Formik } from 'formik';
+import { SearchbarHeader, SearchForm, SubmitButton, SubmitLabel, Input } from 'components/Searchbar/Searchbar.styled';
+import { AiOutlineSearch as SearchIcon } from 'react-icons/ai';
 
-const {
-  Header,
-  SearchForm,
-  SubmitButton,
-  Input,
-  SubmitLabel,
-} = require('./Searchbar.styled');
+// const InitialValues = {
+//     searchQuery: '',
+// }
 
-export const Searchbar = () => {
-  return (
-    <Header>
-      <Formik>
-        <SearchForm>
-          <SubmitButton type="submit">
-            <SubmitLabel>Search</SubmitLabel>
-          </SubmitButton>
 
-          <Input
-            type="text"
-            autocomplete="off"
-            autofocus
-            placeholder="Search images and photos"
-          />
-        </SearchForm>
-      </Formik>
-    </Header>
-  );
+export const SearchbarForm = ({ onSubmit }) => {
+
+    const handleSubmit = (values, actions) => {
+        actions.resetForm();
+        onSubmit(values.searchQuery);
+        actions.setSubmitting(false);
+
+    };
+
+    return (
+        <SearchbarHeader>
+            <Formik
+                initialValues={{ searchQuery: '' }} 
+                onSubmit={handleSubmit}
+            >
+            {({isSubmitting}) => (
+               <SearchForm>
+                    <SubmitButton type="submit" disabled={ isSubmitting }>
+                        <SubmitLabel aria-label="Search">
+                            <SearchIcon />  
+                        </SubmitLabel>     
+                    </SubmitButton>
+                    <Input
+                        name='searchQuery'
+                        type="text"
+                        autoComplete="off"
+                        autoFocus
+                        placeholder="Search images and photos"
+                    />
+                </SearchForm>     
+            )}
+            </Formik>
+        </SearchbarHeader>
+    );
 };
+

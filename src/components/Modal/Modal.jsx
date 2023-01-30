@@ -1,14 +1,40 @@
-// Під час кліку на елемент галереї повинно відкриватися модальне вікно з темним оверлеєм і відображатися велика версія зображення.
-// Модальне вікно повинно закриватися по натисканню клавіші ESC або по кліку на оверлеї.
+import PropTypes from 'prop-types';
+import { ModalWindow, Overlay } from 'components/Modal/Modal.styled';
+import { Component } from 'react';
 
-// Зовнішній вигляд схожий на функціонал цього VanillaJS - плагіна https://basiclightbox.electerious.com/,
-// тільки замість білого модального вікна рендериться зображення(у прикладі натисніть Run).Анімацію робити не потрібно!
+export class Modal extends Component {
+    componentDidMount() {
+        window.addEventListener('keydown', this.handleKeyDown);
+    }
 
-// import { Overlay } from 'components/Modal/Modal.styled';
-const { Overlay, Modal } = require('./Modal.styled');
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.handleKeyDown);
+    }
 
-<Overlay>
-  <Modal>
-    <img src="" alt="" />
-  </Modal>
-</Overlay>;
+    handleKeyDown = e => {
+        if (e.code === 'Escape') {
+            this.props.handleClose();
+        }
+    }
+    
+    onBackdropClick = () => {
+        this.props.handleClose();
+    }
+
+    render() {
+        return (
+            <Overlay onClick={ this.onBackdropClick }>
+                <ModalWindow>
+                    <img src={ this.props.largeImageURL } alt={ this.props.tags } />
+                </ModalWindow>
+            </Overlay>
+        );
+    }
+};
+
+
+Modal.propTypes = {
+  tags: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  handleClose: PropTypes.func.isRequired,
+};
