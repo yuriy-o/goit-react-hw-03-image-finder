@@ -1,6 +1,28 @@
 import styled from '@emotion/styled';
 
 export const OnLoadMoreButton = styled.button`
+  display: block;
+  width: 150px;
+  height: 40px;
+
+  border: none;
+  background: #3a7999;
+  color: #f2f2f2;
+  padding: 10px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 500ms ease;
+
+  &:hover,
+  &:focus {
+    background: rgba(0, 0, 0, 0);
+    color: #3a7999;
+    box-shadow: inset 0 0 0 3px #3a7999;
+    transform: scale(1.05);
+  }
+`;
+/* export const OnLoadMoreButton = styled.button`
     padding: 8px 16px;
     border-radius: 2px;
     background-color: #3d858e;
@@ -22,10 +44,10 @@ export const OnLoadMoreButton = styled.button`
     &:hover,
     &:focus {
         background-color: #1bcde4;
-`;
+`; */
 
 export const ButtonWrapp = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 12px;
-    `;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+`;
